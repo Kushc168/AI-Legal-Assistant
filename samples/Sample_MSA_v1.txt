@@ -1,0 +1,105 @@
+MASTER SERVICES AGREEMENT
+
+This Master Services Agreement (the "Agreement") is made on 1 March 2026 between Acme Retail Limited ("Customer") and Northwind Digital Services Ltd ("Supplier").
+
+SAMPLE DOCUMENT - fictitious parties, created for demonstration only.
+
+1. DEFINITIONS
+
+1.1 "Services" means the IT support and software development services described in Schedule A.
+
+1.2 "Confidential Information" means all information disclosed by one party to the other in connection with this Agreement, whether oral or written, that is marked or reasonably understood to be confidential.
+
+1.3 "Fees" means the charges payable by the Customer for the Services as set out in Clause 4.
+
+2. SERVICES
+
+2.1 The Supplier shall provide the Services to the Customer in accordance with this Agreement and Schedule A.
+
+2.2 The Supplier shall assign suitably qualified personnel to perform the Services and shall comply with the Customer's reasonable site policies when working at the Customer's premises.
+
+2.3 The Customer shall provide the Supplier with reasonable access to its systems and personnel as required for the performance of the Services.
+
+3. TERM AND RENEWAL
+
+3.1 This Agreement commences on the Effective Date and continues for an initial term of twenty-four (24) months.
+
+3.2 This Agreement shall automatically renew for successive periods of twelve (12) months unless either party gives the other not less than 60 days' prior written notice of non-renewal before the end of the then-current term.
+
+4. FEES AND PAYMENT
+
+4.1 The Customer shall pay the Fees set out in Schedule B. The Supplier shall invoice the Fees monthly in advance, and each invoice is payable within 30 days of the invoice date.
+
+4.2 Interest shall accrue on overdue amounts at the rate of 2% per month from the due date until the date of actual payment.
+
+4.3 The Supplier reserves the right to increase the Fees at its sole discretion by giving the Customer 30 days' written notice.
+
+4.4 The monthly Fees shall be automatically debited from the Customer's nominated bank account on the first business day of each month.
+
+5. CONFIDENTIALITY
+
+5.1 Each party shall keep the other party's Confidential Information confidential and shall not disclose it to any third party without the prior written consent of the disclosing party.
+
+5.2 The obligations in this Clause 5 continue for a period of five (5) years after termination or expiry of this Agreement.
+
+6. DATA PROTECTION
+
+6.1 In performing the Services the Supplier will process personal data relating to the Customer's employees and customers.
+
+6.2 The Supplier shall process such personal data only on the documented instructions of the Customer and shall notify the Customer without undue delay after becoming aware of any personal data breach.
+
+7. INTELLECTUAL PROPERTY
+
+7.1 All intellectual property rights in the deliverables created by the Supplier specifically for the Customer shall vest in the Customer on payment of the relevant Fees.
+
+7.2 The Supplier retains ownership of its pre-existing tools and know-how and grants the Customer a non-exclusive licence to use them as part of the deliverables.
+
+8. WARRANTIES
+
+8.1 The Supplier warrants that the Services will be performed with reasonable skill and care in accordance with good industry practice.
+
+8.2 The Supplier warrants that each deliverable will be free from material defects for a warranty period of 90 days from delivery.
+
+9. LIABILITY
+
+9.1 Nothing in this Agreement limits either party's liability for death or personal injury caused by negligence, or for fraud.
+
+9.2 Subject to Clause 9.1 and Clause 9.3, the Supplier's total liability under this Agreement shall not exceed the Fees paid in the twelve (12) months preceding the claim.
+
+9.3 Notwithstanding anything else in this Agreement, the Customer's liability for any breach of Clause 5 (Confidentiality) or Clause 10 (Indemnification) shall be unlimited.
+
+10. INDEMNIFICATION
+
+10.1 The Customer shall indemnify and hold harmless the Supplier against all losses, damages and costs arising from any claim that materials provided by the Customer infringe the intellectual property rights of a third party.
+
+11. TERMINATION
+
+11.1 Either party may terminate this Agreement by written notice if the other party commits a material breach and fails to remedy it within 30 days of being notified of the breach.
+
+11.2 The Supplier may terminate this Agreement at any time without cause by giving the Customer 30 days' written notice.
+
+12. AUDIT
+
+12.1 The Customer may, on reasonable notice and not more than once in any twelve-month period, audit the Supplier's records relating to the Fees and the Services.
+
+13. GENERAL
+
+13.1 Notices under this Agreement shall be in writing and delivered by hand, by courier or by email to the addresses set out above.
+
+13.2 This Agreement shall be governed by and construed in accordance with the laws of England and Wales.
+
+13.3 The courts of London shall have exclusive jurisdiction to settle any dispute arising out of or in connection with this Agreement.
+
+13.4 This Agreement constitutes the entire agreement between the parties and supersedes all prior discussions relating to its subject matter.
+
+SCHEDULE A - STATEMENT OF WORK
+
+A.1 The Supplier shall provide first and second line IT support for the Customer's retail systems and develop enhancements to the Customer's e-commerce platform.
+
+A.2 The detailed deliverables and milestones for the development work are to be agreed by the parties at a later date.
+
+SCHEDULE B - FEES
+
+B.1 IT support: GBP 18,000 per month.
+
+B.2 Development work: charged at GBP 650 per consultant day.

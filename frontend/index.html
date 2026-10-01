@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Legal Assistant</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232a78d6'/><path d='M9 8h10l4 4v12H9z' fill='white'/><path d='M12 15h8M12 19h8M12 23h5' stroke='%232a78d6' stroke-width='1.6'/></svg>">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script>
+    try { const t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M9 8h10l4 4v12H9z" fill="#fff"/><path d="M12 15h8M12 19h8M12 23h5" stroke="var(--accent)" stroke-width="1.6"/></svg>
+        </span>
+        <span class="brand-name">Legal Assistant</span>
+      </div>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="#/dashboard" data-route="dashboard"><svg viewBox="0 0 24 24"><path d="M4 13h6V4H4zm0 7h6v-5H4zm10 0h6v-9h-6zm0-16v5h6V4z"/></svg>Dashboard</a>
+        <a href="#/contracts" data-route="contracts"><svg viewBox="0 0 24 24"><path d="M6 2h8l6 6v14H6zm8 1.5V9h5.5M9 13h8M9 17h8"/></svg>Contracts</a>
+        <a href="#/chat" data-route="chat"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>AI Chat</a>
+        <a href="#/risk" data-route="risk"><svg viewBox="0 0 24 24"><path d="M12 3 2 20h20zM12 10v4m0 3v.5"/></svg>Risk Analyzer</a>
+        <a href="#/compare" data-route="compare"><svg viewBox="0 0 24 24"><path d="M4 4h6v16H4zm10 0h6v16h-6zM10 9h4m-4 6h4"/></svg>Compare Contracts</a>
+        <a href="#/search" data-route="search"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>Search</a>
+        <a href="#/analytics" data-route="analytics"><svg viewBox="0 0 24 24"><path d="M4 20V10m6 10V4m6 16v-7m4 7H3"/></svg>Analytics</a>
+        <div class="nav-sep"></div>
+        <a href="#/profile" data-route="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg>Profile</a>
+        <a href="#/settings" data-route="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9 7 7m10 10 2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Settings</a>
+      </nav>
+      <div class="sidebar-foot" id="mode-badge"></div>
+    </aside>
+    <div class="main-col">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu">
+          <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <h1 id="page-title">Dashboard</h1>
+        <div class="topbar-actions" id="topbar-actions"></div>
+      </header>
+      <main id="view" tabindex="-1"></main>
+    </div>
+  </div>
+  <div id="toasts" aria-live="polite"></div>
+  <div id="overlay-root"></div>
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

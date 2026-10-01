@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "unchanged_similarity": 0.98,
+  "alignment_threshold": 0.35,
+  "top_k": 3,
+  "categories": [
+    {"id": "payment_terms", "name": "Payment terms", "queries": ["payment terms invoices payable within days", "fees paid monthly quarterly"], "keywords": ["payment", "invoice", "payable"], "value_spec": "frequency (monthly/quarterly/annually) and due days"},
+    {"id": "notice_period", "name": "Notice period", "queries": ["days prior written notice", "notice period for termination"], "keywords": ["notice"], "value_spec": "notice period in days or months"},
+    {"id": "confidentiality", "name": "Confidentiality", "queries": ["confidential information obligations", "non-disclosure"], "keywords": ["confidential"], "value_spec": "duration of confidentiality obligation"},
+    {"id": "intellectual_property", "name": "Intellectual property", "queries": ["intellectual property ownership", "license to use work product"], "keywords": ["intellectual property", "copyright", "ownership", "licen"], "value_spec": "who owns the IP"},
+    {"id": "liability", "name": "Liability", "queries": ["limitation of liability cap", "aggregate liability"], "keywords": ["liabilit"], "value_spec": "liability cap amount or multiple of fees"},
+    {"id": "indemnification", "name": "Indemnification", "queries": ["indemnify and hold harmless", "indemnification obligations"], "keywords": ["indemn"], "value_spec": "who indemnifies whom"},
+    {"id": "renewal_terms", "name": "Renewal terms", "queries": ["renewal automatically renew term", "initial term renewal period"], "keywords": ["renew", "term of"], "value_spec": "renewal period length and mechanism"},
+    {"id": "governing_law", "name": "Governing law", "queries": ["governing law governed by the laws of", "jurisdiction courts"], "keywords": ["governing law", "governed by", "jurisdiction"], "value_spec": "governing law jurisdiction"},
+    {"id": "termination", "name": "Termination conditions", "queries": ["right to terminate this agreement", "termination for breach convenience"], "keywords": ["terminat"], "value_spec": "termination triggers and who may terminate"},
+    {"id": "deliverables", "name": "Deliverables", "queries": ["deliverables statement of work", "scope of services"], "keywords": ["deliverable", "scope of", "statement of work"], "value_spec": "list of deliverables"},
+    {"id": "service_levels", "name": "Service levels", "queries": ["service levels uptime availability", "response time service credits"], "keywords": ["service level", "uptime", "availability", "response time"], "value_spec": "availability percentage and response times"},
+    {"id": "warranty", "name": "Warranty", "queries": ["warrants that services", "warranty period disclaimer"], "keywords": ["warrant"], "value_spec": "warranty period"},
+    {"id": "pricing", "name": "Pricing", "queries": ["fees price charges amount", "price increase rates"], "keywords": ["fee", "price", "charge", "rate"], "value_spec": "price amounts and increase caps"},
+    {"id": "responsibilities", "name": "Responsibilities", "queries": ["obligations of the parties responsibilities", "customer shall provide supplier shall"], "keywords": ["responsib", "obligation", "shall provide"], "value_spec": "key obligations per party"}
+  ]
+}

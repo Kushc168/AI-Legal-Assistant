@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "categories": ["Financial", "Legal", "Business", "Compliance", "Operational"],
+  "risk_types": [
+    {
+      "id": "FIN-01", "category": "Financial", "name": "Unlimited liability", "mode": "presence",
+      "default_severity": "Critical",
+      "definition": "A party's liability is uncapped, excluded from any limitation, or expressly unlimited.",
+      "queries": ["limitation of liability cap", "liability shall not be limited", "unlimited liability", "aggregate liability"],
+      "patterns": ["unlimited liability", "liabilit(y|ies)[^.]{0,60}(shall|will) not be (limited|capped)", "no (cap|limit(ation)?) (on|to) (its |the |their )?liabilit", "liabilit(y|ies)[^.]{0,120}(shall be|is|are|will be) unlimited", "without (any )?(cap|limit) (on|to) liabilit"],
+      "template": {
+        "title": "Unlimited liability clause",
+        "explanation": "The clause removes any cap on what a party may have to pay for losses under the contract.",
+        "reason": "Uncapped liability exposes the liable party to losses far larger than the contract value.",
+        "improvement": "Negotiate an aggregate liability cap (for example, 12 months of fees) with narrow carve-outs such as fraud."
+      }
+    },
+    {
+      "id": "FIN-02", "category": "Financial", "name": "High penalty clauses", "mode": "presence",
+      "default_severity": "High",
+      "definition": "Penalties, liquidated damages or service credits that are large relative to the contract value or the breach.",
+      "queries": ["penalty for breach", "liquidated damages", "penalties payable", "service credits percentage of fees"],
+      "patterns": ["liquidated damages", "penalt(y|ies)[^.]{0,80}(\\d+\\s?%|per cent|percent|of the (total )?contract value)", "(pay|forfeit)[^.]{0,40}penalt"],
+      "numeric_check": {"type": "percent_gte", "threshold_key": "penalty_percent_threshold"},
+      "template": {
+        "title": "High penalty or liquidated damages",
+        "explanation": "The clause sets a penalty or pre-agreed damages payable on breach or delay.",
+        "reason": "Large fixed penalties can exceed the real loss and create disproportionate financial exposure.",
+        "improvement": "Cap penalties at a reasonable percentage of the affected fees and make them the sole remedy for that breach."
+      }
+    },
+    {
+      "id": "FIN-03", "category": "Financial", "name": "Automatic payment obligations", "mode": "presence",
+      "default_severity": "Medium",
+      "definition": "Payments are charged, debited or invoiced automatically without approval or notice.",
+      "queries": ["automatically charged", "auto debit payment", "fees invoiced automatically", "payment without approval"],
+      "patterns": ["automatically (be )?(charged|debited|invoiced|billed|deducted)", "auto-?debit", "direct debit", "(charge|debit|invoice)[^.]{0,40}without (further |prior )?(notice|approval|consent)"],
+      "template": {
+        "title": "Automatic payment obligation",
+        "explanation": "Payments are taken or invoiced automatically under this clause.",
+        "reason": "Automatic charges reduce control over spend and make disputed amounts harder to withhold.",
+        "improvement": "Require prior written approval or a notice period before any automatic charge, and a right to dispute it."
+      }
+    },
+    {
+      "id": "FIN-04", "category": "Financial", "name": "Late payment penalties", "mode": "presence",
+      "default_severity": "Medium",
+      "definition": "Interest, fees or suspension rights triggered by late payment.",
+      "queries": ["late payment interest", "overdue invoices", "interest on unpaid amounts", "suspend services for non-payment"],
+      "patterns": ["late payment", "overdue (amounts?|invoices?|payments?|sums?)", "interest[^.]{0,60}(unpaid|overdue|late)", "(unpaid|overdue|late)[^.]{0,60}interest"],
+      "template": {
+        "title": "Late payment penalty",
+        "explanation": "The clause charges interest or fees, or allows suspension, when payment is late.",
+        "reason": "High late-payment interest or quick suspension can escalate costs during genuine invoice disputes.",
+        "improvement": "Limit interest to a statutory or modest rate, add a grace period, and exclude amounts disputed in good faith."
+      }
+    },
+    {
+      "id": "FIN-05", "category": "Financial", "name": "Hidden charges", "mode": "presence",
+      "default_severity": "High",
+      "definition": "Fees, surcharges or price increases that are not fixed in the pricing schedule or can be changed unilaterally.",
+      "queries": ["additional fees and charges", "price increase at discretion", "administrative fee", "reserves the right to change fees"],
+      "patterns": ["additional (fees|charges|costs)", "(reserves? the right|may|is entitled) to (increase|adjust|change|revise) (the |its )?(fees|prices|charges|rates)", "administrat(ive|ion) (fee|charge)", "surcharge", "(fees|charges)[^.]{0,40}(sole|absolute) discretion"],
+      "template": {
+        "title": "Charges that are not fixed",
+        "explanation": "The clause allows extra fees or price changes outside the agreed pricing.",
+        "reason": "Unfixed or unilateral charges make the true cost of the contract unpredictable.",
+        "improvement": "List all fees in the pricing schedule, cap annual increases, and require written agreement for new charges."
+      }
+    },
+    {
+      "id": "LEG-01", "category": "Legal", "name": "Missing confidentiality", "mode": "absence",
+      "default_severity": "High",
+      "definition": "No clause protects confidential information exchanged under the contract.",
+      "queries": ["confidential information", "non-disclosure obligations", "keep information confidential"],
+      "keywords": ["confidential", "non-disclosure", "nondisclosure"],
+      "template": {
+        "title": "No confidentiality clause",
+        "explanation": "The contract does not contain a clause protecting confidential information.",
+        "reason": "Without confidentiality terms, sensitive business information shared under the contract is not protected.",
+        "improvement": "Add mutual confidentiality obligations with a defined term, permitted disclosures and return or destruction of information."
+      }
+    },
+    {
+      "id": "LEG-02", "category": "Legal", "name": "Missing governing law", "mode": "absence",
+      "default_severity": "Medium",
+      "definition": "The contract does not state which law governs it, or states it unclearly.",
+      "queries": ["governing law", "governed by the laws of", "applicable law"],
+      "keywords": ["governing law", "governed by (the )?laws?", "construed in accordance with (the )?laws?", "laws of (the )?(state|republic|kingdom|england|india|new york|delaware)"],
+      "template": {
+        "title": "Governing law not specified",
+        "explanation": "The contract does not state which country's or state's law applies.",
+        "reason": "Without governing law, disputes start with an argument about which law applies, adding cost and uncertainty.",
+        "improvement": "Add a governing-law clause naming a specific jurisdiction."
+      }
+    },
+    {
+      "id": "LEG-03", "category": "Legal", "name": "Missing jurisdiction", "mode": "absence",
+      "default_severity": "Medium",
+      "definition": "The contract does not say which courts or arbitration forum resolve disputes.",
+      "queries": ["jurisdiction of courts", "dispute resolution arbitration", "venue for disputes"],
+      "keywords": ["jurisdiction", "courts? of", "arbitrat", "venue", "dispute resolution"],
+      "template": {
+        "title": "Jurisdiction not specified",
+        "explanation": "The contract does not name the courts or arbitration forum for disputes.",
+        "reason": "Without a forum, either party may sue in an inconvenient or unfavourable location.",
+        "improvement": "Add a jurisdiction or arbitration clause naming the forum, seat and language."
+      }
+    },
+    {
+      "id": "LEG-04", "category": "Legal", "name": "Missing termination rights", "mode": "absence",
+      "default_severity": "High",
+      "definition": "No clause allows the parties to terminate for breach, convenience or insolvency.",
+      "queries": ["right to terminate", "termination for breach", "termination for convenience"],
+      "keywords": ["terminat"],
+      "template": {
+        "title": "No termination rights",
+        "explanation": "The contract does not set out when or how a party may terminate it.",
+        "reason": "Without termination rights, a party may be locked in even after serious breach.",
+        "improvement": "Add termination for material breach (with a cure period), insolvency and, where possible, convenience."
+      }
+    },
+    {
+      "id": "LEG-05", "category": "Legal", "name": "Ambiguous language", "mode": "quality",
+      "default_severity": "Medium",
+      "definition": "Key terms are left to be agreed later, undefined, or open to one party's interpretation.",
+      "queries": ["to be agreed later", "to be determined", "as it deems fit", "from time to time"],
+      "patterns": ["to be (mutually )?(agreed|determined|confirmed|decided)( upon)?( later| at a later date| in due course| separately)?", "\\bTBD\\b", "\\bTBC\\b", "as (it|they|the [a-z]+) (may )?(deems?|sees?) (fit|appropriate)"],
+      "template": {
+        "title": "Ambiguous or open-ended wording",
+        "explanation": "The clause leaves an important term undefined or to be agreed later.",
+        "reason": "Open-ended terms are a common source of disputes because each party can read them differently.",
+        "improvement": "Replace open-ended wording with specific, measurable terms or a defined mechanism for deciding them."
+      }
+    },
+    {
+      "id": "BUS-01", "category": "Business", "name": "Automatic renewal", "mode": "presence",
+      "default_severity": "Medium",
+      "definition": "The contract renews automatically unless a party gives notice.",
+      "queries": ["automatic renewal", "renew automatically for successive terms", "unless notice of non-renewal"],
+      "patterns": ["automatic(ally)?[^.]{0,20}renew", "auto-?renew", "renew(ed|s)? automatically", "successive (renewal )?(terms|periods)", "evergreen"],
+      "template": {
+        "title": "Automatic renewal",
+        "explanation": "The contract renews for a further term unless a party cancels in time.",
+        "reason": "Missing the cancellation window commits the party to another full term and its costs.",
+        "improvement": "Require written reminder before renewal, shorten the non-renewal notice window, or make renewal opt-in."
+      }
+    },
+    {
+      "id": "BUS-02", "category": "Business", "name": "Vendor lock-in", "mode": "presence",
+      "default_severity": "High",
+      "definition": "Terms that make switching provider costly: exclusivity of supply, proprietary formats, no exit assistance, minimum commitments or exit fees.",
+      "queries": ["shall not use other suppliers", "minimum commitment term", "early termination fee", "proprietary format data export"],
+      "patterns": ["(shall|will|may) not[^.]{0,40}(other|alternative|competing|third[- ]party) (suppliers?|providers?|vendors?)", "proprietary (format|system|tools?|platform)", "early termination (fee|charge)", "minimum (commitment|purchase|spend|term)"],
+      "template": {
+        "title": "Vendor lock-in",
+        "explanation": "The clause makes it costly or difficult to move to another provider.",
+        "reason": "Lock-in weakens negotiating position at renewal and raises the cost of exit.",
+        "improvement": "Add exit assistance, data export in a standard format, and remove or reduce exit fees and minimum commitments."
+      }
+    },
+    {
+      "id": "BUS-03", "category": "Business", "name": "Long notice period", "mode": "presence",
+      "default_severity": "Medium",
+      "definition": "A notice period for termination or non-renewal longer than the configured threshold.",
+      "queries": ["days prior written notice", "notice period termination", "months notice"],
+      "patterns": ["(\\d+)\\s*(\\([a-z\\s-]+\\)\\s*)?(calendar |business )?days?'?\\s*(prior |advance )?(written )?notice", "(\\d+)\\s*(\\([a-z\\s-]+\\)\\s*)?months?'?\\s*(prior |advance )?(written )?notice"],
+      "numeric_check": {"type": "notice_days_gt", "threshold_key": "notice_days_threshold"},
+      "template": {
+        "title": "Long notice period",
+        "explanation": "The clause requires a long notice period before termination or non-renewal.",
+        "reason": "Long notice periods delay exit and extend payment obligations after a decision to leave.",
+        "improvement": "Reduce the notice period to 30–60 days, or make it mutual and proportionate to the contract term."
+      }
+    },
+    {
+      "id": "BUS-04", "category": "Business", "name": "One-sided obligations", "mode": "quality",
+      "default_severity": "High",
+      "definition": "Rights or discretions granted to one party only, without an equivalent for the other.",
+      "queries": ["sole discretion", "may at any time without cause", "unilaterally amend", "shall have no liability"],
+      "patterns": ["sole (and absolute )?discretion", "absolute discretion", "unilateral(ly)?", "at any time (and )?without (cause|reason|notice|liability)", "(shall|will) (have|bear) no (liability|obligation|responsibility) (whatsoever )?(to|for)"],
+      "template": {
+        "title": "One-sided right or obligation",
+        "explanation": "The clause gives one party a right or discretion that the other party does not have.",
+        "reason": "Unbalanced terms shift risk and control to one side and weaken the other party's remedies.",
+        "improvement": "Make the right mutual, add objective criteria or notice, or require consent not to be unreasonably withheld."
+      }
+    },
+    {
+      "id": "BUS-05", "category": "Business", "name": "Exclusive agreements", "mode": "presence",
+      "default_severity": "Medium",
+      "definition": "Exclusivity, non-compete or non-solicitation restrictions on a party.",
+      "queries": ["exclusive supplier", "exclusivity", "non-compete", "shall not solicit"],
+      "patterns": ["(?<!non-)(?<!non )\\bexclusiv(e|ity|ely)\\b(?!\\s+(jurisdiction|licen[cs]e|remedy|of\\b))", "non-?compet", "(shall|will) not[^.]{0,40}(compete|solicit)"],
+      "template": {
+        "title": "Exclusivity or non-compete restriction",
+        "explanation": "The clause restricts a party from working with others or competing.",
+        "reason": "Exclusivity limits commercial options and may be costly if the counterparty underperforms.",
+        "improvement": "Limit exclusivity by scope, territory and duration, and tie it to performance targets."
+      }
+    },
+    {
+      "id": "CMP-01", "category": "Compliance", "name": "Missing GDPR clause", "mode": "absence",
+      "default_severity": "High", "applies_if": "personal_data",
+      "definition": "Personal data is processed but the contract does not address GDPR obligations.",
+      "queries": ["GDPR compliance", "General Data Protection Regulation", "data subject rights"],
+      "keywords": ["\\bGDPR\\b", "General Data Protection Regulation", "2016/679"],
+      "template": {
+        "title": "No GDPR clause",
+        "explanation": "The contract involves personal data but does not refer to GDPR obligations.",
+        "reason": "Processing EU personal data without GDPR terms (Article 28) can lead to regulatory fines.",
+        "improvement": "Add GDPR-compliant processing terms or attach a data processing agreement."
+      }
+    },
+    {
+      "id": "CMP-02", "category": "Compliance", "name": "Missing data protection clause", "mode": "absence",
+      "default_severity": "High", "applies_if": "personal_data",
+      "definition": "Personal data is processed but there are no data protection obligations.",
+      "queries": ["data protection obligations", "processing of personal data", "data processing agreement", "privacy laws"],
+      "keywords": ["data protection", "data processing agreement", "privacy (laws?|legislation|regulations?)", "\\bDPDP\\b", "\\bCCPA\\b", "protect(ion of)? (the )?personal (data|information)", "data processor"],
+      "template": {
+        "title": "No data protection clause",
+        "explanation": "The contract involves personal data but sets no data protection obligations.",
+        "reason": "Without data protection terms, responsibility for breaches and regulatory compliance is unclear.",
+        "improvement": "Add data protection obligations: lawful processing, breach notification, sub-processor controls, deletion on exit."
+      }
+    },
+    {
+      "id": "CMP-03", "category": "Compliance", "name": "Missing security requirements", "mode": "absence",
+      "default_severity": "Medium",
+      "definition": "No information security obligations or standards.",
+      "queries": ["information security measures", "security requirements standards", "encryption ISO 27001"],
+      "keywords": ["security (measures|requirements|controls|standards|polic(y|ies)|obligations)", "information security", "ISO ?27001", "SOC ?2", "encrypt", "technical and organi[sz]ational measures"],
+      "template": {
+        "title": "No security requirements",
+        "explanation": "The contract does not set information security obligations or standards.",
+        "reason": "Without security terms, there is no contractual baseline to enforce if systems or data are compromised.",
+        "improvement": "Add minimum security controls or a recognised standard (for example ISO 27001) and breach notification duties."
+      }
+    },
+    {
+      "id": "CMP-04", "category": "Compliance", "name": "Missing audit rights", "mode": "absence",
+      "default_severity": "Medium",
+      "definition": "No right to audit or inspect the other party's records or compliance.",
+      "queries": ["right to audit", "inspect books and records", "audit compliance"],
+      "keywords": ["audit", "inspect(ion)?[^.]{0,30}(records|books|premises)", "right to (examine|inspect)"],
+      "template": {
+        "title": "No audit rights",
+        "explanation": "The contract gives no right to audit or inspect the other party's records or compliance.",
+        "reason": "Without audit rights, compliance with pricing, security and data obligations cannot be verified.",
+        "improvement": "Add a right to audit on reasonable notice, at least annually and after any incident."
+      }
+    },
+    {
+      "id": "OPS-01", "category": "Operational", "name": "Undefined deliverables", "mode": "absence",
+      "default_severity": "High", "applies_if": "services",
+      "definition": "The services or deliverables are not described, or are left to be defined later.",
+      "queries": ["deliverables", "scope of services statement of work", "specifications"],
+      "keywords": ["deliverables?", "statement of work", "\\bSOW\\b", "scope of (work|services)", "specifications?", "description of (the )?services"],
+      "patterns": ["deliverables?[^.]{0,40}(to be|shall be|will be) (agreed|determined|defined)( later| separately| in due course)"],
+      "template": {
+        "title": "Deliverables not defined",
+        "explanation": "The contract does not clearly define what must be delivered.",
+        "reason": "Undefined deliverables make it impossible to prove non-performance or reject poor work.",
+        "improvement": "Attach a statement of work listing each deliverable, its specification and due date."
+      }
+    },
+    {
+      "id": "OPS-02", "category": "Operational", "name": "Undefined responsibilities", "mode": "quality",
+      "default_severity": "Medium",
+      "definition": "Who does what is left vague or to be agreed later.",
+      "queries": ["responsibilities of the parties", "cooperate as necessary", "roles to be agreed"],
+      "patterns": ["responsibilit(y|ies)[^.]{0,40}(to be|shall be|will be) (agreed|determined|defined)", "(cooperate|work together)[^.]{0,30}(as (may be )?necessary|as required)[^.]{0,30}(determine|agree)"],
+      "template": {
+        "title": "Responsibilities not defined",
+        "explanation": "The clause leaves the split of responsibilities vague or to be agreed later.",
+        "reason": "Unclear responsibilities lead to gaps in delivery and disputes about who is at fault.",
+        "improvement": "Add a responsibilities matrix (RACI) or list each party's obligations explicitly."
+      }
+    },
+    {
+      "id": "OPS-03", "category": "Operational", "name": "Missing SLA", "mode": "absence",
+      "default_severity": "Medium", "applies_if": "services",
+      "definition": "No service levels, availability targets or response times.",
+      "queries": ["service level agreement", "uptime availability", "response time resolution time"],
+      "keywords": ["service levels?", "\\bSLAs?\\b", "uptime", "availability (of|target)", "response times?", "resolution times?"],
+      "template": {
+        "title": "No service levels",
+        "explanation": "The contract sets no service levels, availability targets or response times.",
+        "reason": "Without SLAs there is no objective measure of performance and no remedy for poor service.",
+        "improvement": "Add measurable service levels with reporting and service credits for missed targets."
+      }
+    },
+    {
+      "id": "OPS-04", "category": "Operational", "name": "Missing acceptance criteria", "mode": "absence",
+      "default_severity": "Medium", "applies_if": "services",
+      "definition": "No process or criteria for accepting or rejecting deliverables.",
+      "queries": ["acceptance criteria", "acceptance testing", "deemed accepted"],
+      "keywords": ["acceptance (criteria|tests?|testing|procedure|certificate|period)", "deemed (to be )?accepted", "accept(ed|ance) of (the )?deliverables?"],
+      "template": {
+        "title": "No acceptance criteria",
+        "explanation": "The contract does not define how deliverables are tested and accepted.",
+        "reason": "Without acceptance criteria, payment may fall due for work that does not meet requirements.",
+        "improvement": "Add acceptance tests, a review period, a rejection process and a limit on deemed acceptance."
+      }
+    }
+  ]
+}

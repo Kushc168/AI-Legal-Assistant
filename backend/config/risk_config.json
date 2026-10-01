@@ -1,0 +1,25 @@
+{
+  "severity_order": ["Low", "Medium", "High", "Critical"],
+  "severity_weights": {"Critical": 0.35, "High": 0.15, "Medium": 0.06, "Low": 0.02},
+  "level_bands": [
+    {"level": "Low", "min": 0},
+    {"level": "Medium", "min": 25},
+    {"level": "High", "min": 50},
+    {"level": "Critical", "min": 75}
+  ],
+  "min_confidence": 0.5,
+  "absence_confidence_cap": 0.85,
+  "retrieval_factor": [
+    {"min_similarity": 0.25, "factor": 1.0},
+    {"min_similarity": 0.15, "factor": 0.9},
+    {"min_similarity": 0.0, "factor": 0.8}
+  ],
+  "absence_similarity_threshold": 0.3,
+  "retrieval_top_k": 6,
+  "thresholds": {
+    "notice_days_threshold": 90,
+    "penalty_percent_threshold": 10
+  },
+  "quote_max_chars": 300,
+  "_calibration": "Similarity thresholds are calibrated for the built-in lexical embedder (relevant clauses score about 0.18-0.35). Raise them if you switch to a neural embedder."
+}
